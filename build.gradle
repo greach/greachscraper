@@ -1,0 +1,40 @@
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "com.github.jengelman.gradle.plugins:shadow:1.2.4"
+    }
+}
+
+apply plugin: 'groovy'
+apply plugin: "com.github.johnrengelman.shadow"
+apply plugin: 'application'
+
+mainClassName = "com.greachconf.Main"
+
+repositories {
+    jcenter()
+}
+ext {
+    seleniumVersion = '2.52.0'
+    phantomJsDriverVersion = '1.2.1'
+}
+dependencies {
+    compile 'org.slf4j:slf4j-api:1.7.21'
+    compile "org.gebish:geb-core:1.0"
+    compile "org.seleniumhq.selenium:selenium-support:${seleniumVersion}"
+    compile "org.seleniumhq.selenium:selenium-firefox-driver:${seleniumVersion}"
+    compile "org.seleniumhq.selenium:selenium-chrome-driver:${seleniumVersion}"
+    compile "net.sourceforge.htmlunit:htmlunit:2.18"
+    compile "org.seleniumhq.selenium:selenium-htmlunit-driver:2.47.1"
+    compile("com.codeborne:phantomjsdriver:$phantomJsDriverVersion")
+    compile 'org.spockframework:spock-core:1.0-groovy-2.4'
+    compile 'com.googlecode.plist:dd-plist:1.16'
+}
+
+test {
+    systemProperties System.properties
+}
