@@ -1,21 +1,19 @@
 import org.openqa.selenium.chrome.ChromeDriver
-import org.openqa.selenium.firefox.FirefoxDriver
-import org.openqa.selenium.htmlunit.HtmlUnitDriver
-import org.openqa.selenium.phantomjs.PhantomJSDriver
+import org.openqa.selenium.chrome.ChromeOptions
 
 environments {
 
-    htmlUnit {
-        driver = { new HtmlUnitDriver() }
-    }
-
-    firefox {
-        driver = { new FirefoxDriver() }
-    }
-    phantomJs {
-        driver = { new PhantomJSDriver() }
-    }
+    // run via “./gradlew -Dgeb.env=chrome iT”
     chrome {
         driver = { new ChromeDriver() }
+    }
+
+    // run via “./gradlew -Dgeb.env=chromeHeadless iT”
+    chromeHeadless {
+        driver = {
+            ChromeOptions o = new ChromeOptions()
+            o.addArguments('headless')
+            new ChromeDriver(o)
+        }
     }
 }

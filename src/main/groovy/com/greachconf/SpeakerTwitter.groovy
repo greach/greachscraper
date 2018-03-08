@@ -34,6 +34,21 @@ class SpeakerTwitter {
             'Sergei Egorov': 'bsideup',
             'Sergio del Amo': 'sdelamo',
             'Tomás Crespo García': 'TomasCrespo',
-            'Vladimir Orany': 'musketyr'
+            'Vladimír Oraný': 'musketyr',
+            'Hélain Schoonjans': 'Hlain1',
+            'Dierk König': 'mittie',
+            'Matthias Rottländer': 'faradaxian',
+            'Paul King': 'paulk_asert',
+            'Puneet Behl': 'puneetbhl',
+            'Jeff Beck': 'beckje01',
+            'Olga Maciaszek-Sharma': 'olga_maciaszek',
+            'Steve Pember': 'svpember',
+            'Evelina Kieras': 'Ev3Kieras',
+            'Ralf D. Müller': 'RalfDMueller',
+            'Miguel Angel Rueda': 'MiguelRuGa',
+            'Jorge Aguilera': 'jagedn',
+            'Miguel Ángel García Gómez': 'MiguelAngelGG82',
+            'Markus Schlichting': 'madmas',
+            'Søren Berg Glasius': 'sbglasius',
     ]
 }

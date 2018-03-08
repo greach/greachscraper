@@ -35,6 +35,8 @@ class PlistGenerator {
 
     void savePlist(List<Speaker> speakers, List<Talk> talks) {
 
+        speakers.findAll { it.twitter == null }.each { println "Speaker without Twitter set: ${it.slug}"}
+
         Long primaryKey = 2017001
 
         List<String> roomNames = talks.collect { it.location }.unique()

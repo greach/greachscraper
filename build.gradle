@@ -5,36 +5,47 @@ buildscript {
         }
     }
     dependencies {
-        classpath "com.github.jengelman.gradle.plugins:shadow:1.2.4"
+        classpath "com.github.jengelman.gradle.plugins:shadow:$shadowVersion"
+        classpath "gradle.plugin.com.energizedwork.webdriver-binaries:webdriver-binaries-gradle-plugin:$webdriverBinariesVersion"
     }
 }
 
 apply plugin: 'groovy'
 apply plugin: "com.github.johnrengelman.shadow"
 apply plugin: 'application'
+apply plugin:"com.energizedwork.webdriver-binaries"
 
 mainClassName = "com.greachconf.Main"
 
 repositories {
     jcenter()
 }
-ext {
-    seleniumVersion = '2.52.0'
-    phantomJsDriverVersion = '1.2.1'
+
+
+webdriverBinaries {
+    chromedriver '2.35'
+    geckodriver '0.19.1'
 }
+
 dependencies {
     compile 'org.slf4j:slf4j-api:1.7.21'
-    compile "org.gebish:geb-core:1.0"
-    compile "org.seleniumhq.selenium:selenium-support:${seleniumVersion}"
-    compile "org.seleniumhq.selenium:selenium-firefox-driver:${seleniumVersion}"
-    compile "org.seleniumhq.selenium:selenium-chrome-driver:${seleniumVersion}"
-    compile "net.sourceforge.htmlunit:htmlunit:2.18"
-    compile "org.seleniumhq.selenium:selenium-htmlunit-driver:2.47.1"
-    compile("com.codeborne:phantomjsdriver:$phantomJsDriverVersion")
+    compile "org.gebish:geb-core:$gebVersion"
+    runtime "org.seleniumhq.selenium:selenium-chrome-driver:$seleniumVersion"
+    compile "org.seleniumhq.selenium:selenium-remote-driver:$seleniumVersion"
+    compile "org.seleniumhq.selenium:selenium-api:$seleniumVersion"
+    compile "org.seleniumhq.selenium:selenium-support:$seleniumVersion"
     compile 'org.spockframework:spock-core:1.0-groovy-2.4'
     compile 'com.googlecode.plist:dd-plist:1.16'
 }
 
-test {
-    systemProperties System.properties
+runShadow {
+    systemProperty "geb.env", System.getProperty('geb.env')
+    systemProperty "geb.build.reportsDir", reporting.file("geb/integrationTest")
+    systemProperty "webdriver.chrome.driver", System.getProperty('webdriver.chrome.driver')
+}
+
+
+tasks.withType(Test) {
+    systemProperty "geb.env", System.getProperty('geb.env')
+    systemProperty "geb.build.reportsDir", reporting.file("geb/integrationTest")
 }
